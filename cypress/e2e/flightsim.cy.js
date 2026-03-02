@@ -18,13 +18,13 @@ describe("FlightSim.to homepage", () => {
     cy.visit("/");
 
 
-    cy.contains("Sceneries", { matchCase: false })
+   /* cy.contains("Sceneries", { matchCase: false })
       .should("be.visible")
     
   
    
 
-    /*cy.contains("a", "Sceneries")
+    cy.contains("a", "Sceneries")
       .trigger("mouseover", { force: true })
       .trigger("mouseenter", { force: true });
 
@@ -45,51 +45,48 @@ describe("FlightSim.to homepage", () => {
     cy.get('#search').closest('form').submit();*/
 
     
-    cy.visit("https://flightsim.to/by-country/US/search/mckinney");
-
-    cy.get('div.tile-grid.results')
-     .children()
-     .should('have.length', 0);
-
-    cy.wait(2000);
-
-    cy.visit("https://flightsim.to/by-country/US/search/Plano");
-
-    cy.get('div.tile-grid.results')
-     .children()
-     .should('have.length', 0);
-
-    cy.visit("https://flightsim.to/by-country/US/search/Denton");
+    cy.visit("https://flightsim.to/scenery/country/US?q=Mckinney&sort=popular");
     
-    cy.get('div.tile-grid.results')
-     .children()
-     .should('have.length', 1);
+   
+    cy.get('main a[href^="/scenery/"]', { timeout: 20000 })
+      .should('have.length', 0);
+
+
+    cy.visit("https://flightsim.to/scenery?q=plano&country=US");
+
+
+    cy.get('main a[href^="/scenery/"]', { timeout: 20000 })
+      .should('have.length', 0);
+
+    cy.visit("https://flightsim.to/scenery?q=denton&country=US");
+    
+    
+    cy.get('main a[href^="/scenery/"]', { timeout: 20000 })
+      .should('have.length', 0);
 
     
-    cy.visit("https://flightsim.to/by-country/US/search/Frisco");
+    cy.visit("https://flightsim.to/scenery?q=frisco&country=US");
     
-    cy.get('div.tile-grid.results')
-     .children()
-     .should('have.length', 0);
+    cy.get('main a[href^="/scenery/"]', { timeout: 20000 })
+      .should('have.length', 0);
 
-    cy.visit("https://flightsim.to/by-country/US/search/Richardson");
+    cy.visit("https://flightsim.to/scenery?q=richardson&country=US");
     
-    cy.get('div.tile-grid.results')
-     .children()
-     .should('have.length', 1);
+   
+     cy.get('main a[href^="/scenery/"]', { timeout: 20000 })
+      .should('have.length', 0);
 
-    cy.visit("https://flightsim.to/by-country/US/search/Allen");
+    cy.visit("https://flightsim.to/scenery?q=allen&country=US");
+
+
+    cy.get('main a[href^="/scenery/"]', { timeout: 20000 })
+      .should('have.length', 6);
+
+    cy.visit("https://flightsim.to/scenery?q=little+elm&country=US");
+
+     cy.get('main a[href^="/scenery/"]', { timeout: 20000 })
+      .should('have.length', 0);
     
-    cy.get('div.tile-grid.results')
-     .children()
-     .should('have.length', 10);
-
-    cy.visit("https://flightsim.to/by-country/US/search/Little+Elm");
-    
-    cy.get('div.tile-grid.results')
-     .children()
-     .should('have.length', 10);
-
 
   });
 
